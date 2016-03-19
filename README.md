@@ -1,4 +1,4 @@
-mysql-collection (temp name)
+mysql-schema (temp name)
 ===========
 
 ## Intrduction
@@ -12,10 +12,6 @@ let pool = module.exports = mysql.createPool({
   user: 'root',
   password: 'aaaa1111',
   database: 'sample'
-})
-
-pool.getConnection(function (err) {
-  if (err) throw err
 })
 
 const Collection = require('../index')
