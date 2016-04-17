@@ -59,17 +59,42 @@ find result with given conditions.
 - table: *String* table name
 - conds: *Object* filter conditions, see [Conditions](#Conditions)
 - options: *Object*
-  - fields: *String* fields retrieved by Mysql. Default `*`
+  - fields: *String|Object* fields retrieved by Mysql. Default `*` See [Fields](#Fields)
   - joins: *Array* array of Join, see [Join](#Join)
 
 ### DB.update *(table, id, object, options)
 
 ### DB.insert *(table, object, options)
 
-### DB.makeConditionField *(table, conds, joiner)
+### DB.makeConditionField (table, conds, joiner)
 - table: *String* table name
 - conds: *Object* filter conditions, see [Conditions](#Conditions)
 - joiner: *String* `AND` or `OR`
+
+### DB.makeConditionField (fields)
+- fields: See[Fields](#Fields)
+
+### Fields
+*Object* with `key` as Showname and `value` as expression. Default is '*'. For example:
+
+```
+fields = '*' // Default
+
+fields = {
+  '*': '*'
+}
+
+fields = {
+  'fieldName': 'fieldName',
+  ...
+}
+
+fields = {
+  sum: 'sum(fieldName1 + fieldName2)',
+  avg: 'avg(fieldName)',
+  count: 'count(fieldName)',
+}
+```
 
 ### Conditions
 Condtion object with `key` and `value`. `value` will be escaped. `key` format as `column_name$operation`. Operations(case insensitive) contains: `= > >= < <= <> != LIKE IN AND OR`.
@@ -93,6 +118,7 @@ TODO: It is too complicated to explain this. This API is very unstable now. Ther
 ### Schema.construct(table, schema, options)
 ### Schema.find
 ### Schema.load
+### Schema.aggregate
 ### Schema.update
 ### Schema.insert
 ### Schema.delete
